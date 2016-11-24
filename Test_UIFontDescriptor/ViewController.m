@@ -10,6 +10,8 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+
 @end
 
 @implementation ViewController
@@ -19,10 +21,15 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)logAction:(id)sender {
+    if ([self.textField hasText]) {
+        // Font family name matching
+        UIFontDescriptor *family = [UIFontDescriptor fontDescriptorWithFontAttributes:@{UIFontDescriptorFamilyAttribute:self.textField.text}];
+        
+        NSArray *matches = [family matchingFontDescriptorsWithMandatoryKeys: nil];
+        
+        NSLog(@"%@", matches);
+    }
 }
 
 
